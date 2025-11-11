@@ -72,7 +72,7 @@ public class BasicOpMode_Linear extends LinearOpMode {
        DcMotor motorFrontRight = hardwareMap.get(DcMotor.class, "dexter");
        DcMotor motorBackRight = hardwareMap.get(DcMotor.class, "teleporter");
 
-       // yes, these are the names lol
+       // yes, these are the names lol  
 
        // Reverse left motors to ensure proper driving direction
        motorFrontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
