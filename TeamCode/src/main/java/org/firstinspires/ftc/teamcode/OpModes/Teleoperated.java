@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+//import com.bylazar.telemetry.PanelsTelemetry;
+//import com.bylazar.telemetry.TelemetryManager;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import dev.nextftc.core.commands.Command;
 import dev.nextftc.core.components.BindingsComponent;
@@ -9,7 +11,6 @@ import dev.nextftc.ftc.NextFTCOpMode;
 import dev.nextftc.ftc.components.BulkReadComponent;
 import dev.nextftc.hardware.controllable.MotorGroup;
 import dev.nextftc.hardware.driving.MecanumDriverControlled;
-import dev.nextftc.hardware.impl.CRServoEx;
 import dev.nextftc.hardware.impl.MotorEx;
 import dev.nextftc.hardware.powerable.SetPower;
 
@@ -23,15 +24,15 @@ public class NextOp extends NextFTCOpMode {
         );
     }
 
+    private final MotorEx aarav = new MotorEx("malhotra");
     private final MotorEx shooter = new MotorEx("manesh");
     private final MotorEx farmer = new MotorEx("ranjit").reversed();
     private final MotorGroup flywheel = new MotorGroup(shooter, farmer);
-    private final CRServoEx ser = new CRServoEx("rint");
-    private final CRServoEx rvo = new CRServoEx("lint");
     private final MotorEx frontLeftMotor = new MotorEx("kumar").reversed();
     private final MotorEx frontRightMotor = new MotorEx("dexter");
     private final MotorEx backLeftMotor = new MotorEx("relocator").reversed();
     private final MotorEx backRightMotor = new MotorEx("teleporter");
+//    private final TelemetryManager tlm = PanelsTelemetry.INSTANCE.getTelemetry();
     @Override
     public void onStartButtonPressed() {
         Command driverControlled = new MecanumDriverControlled(
@@ -49,17 +50,19 @@ public class NextOp extends NextFTCOpMode {
 
         Gamepads.gamepad2().b().whenBecomesTrue(() -> Indexer.INSTANCE.move180().schedule());
 
-        Gamepads.gamepad2().rightBumper().whenBecomesTrue(() -> Indexer.INSTANCE.fwd120().schedule());
+        Gamepads.gamepad2().rightBumper().whenBecomesTrue(() -> Indexer.INSTANCE.move120().schedule());
 
-        Gamepads.gamepad2().leftBumper().whenBecomesTrue(() -> Indexer.INSTANCE.bwd120().schedule());
+//        Gamepads.gamepad2().rightStickY().greaterThan(0.2).whenBecomesTrue(new SetPower(flywheel, 0));
+//
+//        Gamepads.gamepad2().rightStickY().lessThan(-0.2).whenBecomesTrue(new SetPower(flywheel, -1));
 
         Gamepads.gamepad2().rightStickY().greaterThan(0.2).whenBecomesTrue(new SetPower(flywheel, 0));
 
-        Gamepads.gamepad2().rightStickY().lessThan(-0.2).whenBecomesTrue(new SetPower(flywheel, -1));
+        Gamepads.gamepad2().rightStickY().lessThan(-0.2).whenBecomesTrue(new SetPower(flywheel, -1.2/3.0));
 
-        Gamepads.gamepad2().rightStickX().greaterThan(0.2).whenBecomesTrue(new SetPower(ser, 1).and(new SetPower(rvo, -1)));
+        Gamepads.gamepad2().rightStickX().greaterThan(0.2).whenBecomesTrue(new SetPower(aarav, -1));
 
-        Gamepads.gamepad2().rightStickX().lessThan(-0.2).whenBecomesTrue(new SetPower(ser, 0).and(new SetPower(rvo, 0)));
+        Gamepads.gamepad2().rightStickX().lessThan(-0.2).whenBecomesTrue(new SetPower(aarav, 0));
 
         Gamepads.gamepad2().rightTrigger().greaterThan(0.2).whenBecomesTrue(Flicker.INSTANCE.smackThat);
 
