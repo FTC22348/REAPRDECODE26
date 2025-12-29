@@ -1,12 +1,8 @@
-package org.firstinspires.ftc.teamcode.OpModes;
+package org.firstinspires.ftc.teamcode;
 
 //import com.bylazar.telemetry.PanelsTelemetry;
 //import com.bylazar.telemetry.TelemetryManager;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
-import org.firstinspires.ftc.teamcode.Subsystems.Flicker;
-import org.firstinspires.ftc.teamcode.Subsystems.Indexer;
-
 import dev.nextftc.core.commands.Command;
 import dev.nextftc.core.components.BindingsComponent;
 import dev.nextftc.core.components.SubsystemComponent;
@@ -18,9 +14,9 @@ import dev.nextftc.hardware.driving.MecanumDriverControlled;
 import dev.nextftc.hardware.impl.MotorEx;
 import dev.nextftc.hardware.powerable.SetPower;
 
-@TeleOp(name = "let's fry this fish")
-public class Teleoperated extends NextFTCOpMode {
-    public Teleoperated() {
+@TeleOp(name = "NextFTC TeleOp")
+public class NextOp extends NextFTCOpMode {
+    public NextOp() {
         addComponents(
                 new SubsystemComponent(Indexer.INSTANCE, Flicker.INSTANCE),
                 BulkReadComponent.INSTANCE,
@@ -36,6 +32,7 @@ public class Teleoperated extends NextFTCOpMode {
     private final MotorEx frontRightMotor = new MotorEx("dexter");
     private final MotorEx backLeftMotor = new MotorEx("relocator").reversed();
     private final MotorEx backRightMotor = new MotorEx("teleporter");
+//    private final TelemetryManager tlm = PanelsTelemetry.INSTANCE.getTelemetry();
     @Override
         public void onStartButtonPressed() {
             Command driverControlled = new MecanumDriverControlled(
@@ -54,6 +51,10 @@ public class Teleoperated extends NextFTCOpMode {
         Gamepads.gamepad2().b().whenBecomesTrue(() -> Indexer.INSTANCE.move180().schedule());
 
         Gamepads.gamepad2().rightBumper().whenBecomesTrue(() -> Indexer.INSTANCE.move120().schedule());
+
+//        Gamepads.gamepad2().rightStickY().greaterThan(0.2).whenBecomesTrue(new SetPower(flywheel, 0));
+//
+//        Gamepads.gamepad2().rightStickY().lessThan(-0.2).whenBecomesTrue(new SetPower(flywheel, -1));
 
         Gamepads.gamepad2().rightStickY().greaterThan(0.2).whenBecomesTrue(new SetPower(flywheel, 0));
 
