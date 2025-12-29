@@ -37,16 +37,16 @@ public class Teleoperated extends NextFTCOpMode {
     private final MotorEx backLeftMotor = new MotorEx("relocator").reversed();
     private final MotorEx backRightMotor = new MotorEx("teleporter");
     @Override
-    public void onStartButtonPressed() {
-        Command driverControlled = new MecanumDriverControlled(
-                frontLeftMotor,
-                frontRightMotor,
-                backLeftMotor,
-                backRightMotor,
-                Gamepads.gamepad1().leftStickY().negate(),
-                Gamepads.gamepad1().leftStickX(),
-                Gamepads.gamepad1().rightStickX()
-        );
+        public void onStartButtonPressed() {
+            Command driverControlled = new MecanumDriverControlled(
+                    frontLeftMotor,
+                    frontRightMotor,
+                    backLeftMotor,
+                    backRightMotor,
+                    Gamepads.gamepad1().leftStickY().negate(),
+                    Gamepads.gamepad1().leftStickX(),
+                    Gamepads.gamepad1().rightStickX()
+            );
         driverControlled.schedule();
 
         Gamepads.gamepad2().a().whenBecomesTrue(() -> Indexer.INSTANCE.move60().schedule());

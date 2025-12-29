@@ -11,4 +11,4 @@ public class Flicker implements Subsystem {
     private ServoEx akon = new ServoEx("akon");
     public Command smackThat = new SetPosition(akon, 1);
     public Command allOnTheFloor = new SetPosition(akon, 0);
-}
+}   `
