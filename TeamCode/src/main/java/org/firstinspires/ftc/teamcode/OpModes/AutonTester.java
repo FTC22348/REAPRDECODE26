@@ -27,7 +27,7 @@ public class AutonTester extends LinearOpMode {
         backLeftMotor.setPower(1);
         backRightMotor.setPower(1);
 
-        sleep(1000);
+        sleep(5000);
 
         frontLeftMotor.setPower(0);
         frontRightMotor.setPower(0);
