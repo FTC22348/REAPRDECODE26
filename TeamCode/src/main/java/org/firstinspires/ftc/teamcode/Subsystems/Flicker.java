@@ -9,6 +9,6 @@ public class Flicker implements Subsystem {
     public static final Flicker INSTANCE = new Flicker();
     private Flicker() { }
     private ServoEx akon = new ServoEx("akon");
-    public Command smackThat = new SetPosition(akon, 1);
+    public Command smackThat = new SetPosition(akon, 0.9);
     public Command allOnTheFloor = new SetPosition(akon, 0);
 }

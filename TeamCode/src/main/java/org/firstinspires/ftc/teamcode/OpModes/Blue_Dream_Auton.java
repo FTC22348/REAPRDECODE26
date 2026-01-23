@@ -27,10 +27,10 @@ import dev.nextftc.extensions.pedro.PedroComponent;
 import dev.nextftc.ftc.NextFTCOpMode;
 import dev.nextftc.ftc.components.BulkReadComponent;
 
-@Autonomous(name = "red dream")
+@Autonomous(name = "blue dream")
 @Configurable
-public class Red_Dream_Auton extends NextFTCOpMode {
-    public Red_Dream_Auton() {
+public class Blue_Dream_Auton extends NextFTCOpMode {
+    public Blue_Dream_Auton() {
         addComponents(
                 new SubsystemComponent(Indexer.INSTANCE, Flicker.INSTANCE, Flywheel.INSTANCE, Intake.INSTANCE),
                 BulkReadComponent.INSTANCE,
@@ -43,36 +43,36 @@ public class Red_Dream_Auton extends NextFTCOpMode {
     public void onInit() {
         path1 = follower().pathBuilder().addPath(
                         new BezierLine(
-                                new Pose(122.579, 124.055),
-                                new Pose(108.017, 113.475)
+                                new Pose(21.421, 124.055),
+                                new Pose(35.983, 113.475)
                         )
-                ).setLinearHeadingInterpolation(Math.toRadians(36), Math.toRadians(36))
+                ).setLinearHeadingInterpolation(Math.toRadians(144), Math.toRadians(144))
                 .build();
 
         path2 = follower().pathBuilder().addPath(
                         new BezierCurve(
-                                new Pose(108.017, 113.475),
-                                new Pose(69.936, 82.232),
-                                new Pose(95.745, 83.529)
+                                new Pose(35.983, 113.475),
+                                new Pose(74.064, 82.232),
+                                new Pose(48.255, 83.529)
                         )
-                ).setLinearHeadingInterpolation(Math.toRadians(36), Math.toRadians(0))
+                ).setLinearHeadingInterpolation(Math.toRadians(144), Math.toRadians(180))
                 .build();
 
         path3 = follower().pathBuilder().addPath(
                         new BezierLine(
-                                new Pose(95.745, 83.529),
-                                new Pose(130.000, 83.529)
+                                new Pose(48.255, 83.529),
+                                new Pose(14.000, 83.529)
                         )
-                ).setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(0))
+                ).setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(180))
                 .build();
 
         path4 = follower().pathBuilder().addPath(
                         new BezierCurve(
-                                new Pose(130.000, 83.529),
-                                new Pose(102.127, 87.172),
-                                new Pose(108.017, 113.475)
+                                new Pose(14.000, 83.529),
+                                new Pose(41.873, 87.127),
+                                new Pose(35.983, 113.475)
                         )
-                ).setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(36))
+                ).setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(144))
                 .build();
     }
     private Command autonomousRoutine() {
@@ -150,7 +150,7 @@ public class Red_Dream_Auton extends NextFTCOpMode {
     }
     @Override
     public void onStartButtonPressed() {
-        follower().setStartingPose(new Pose(122.579, 124.055, Math.toRadians(36)));
+        follower().setStartingPose(new Pose(21.421, 124.055, Math.toRadians(144)));
         autonomousRoutine().schedule();
     }
 }
