@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Subsystems;
+package org.firstinspires.ftc.teamcode;
 
 import dev.nextftc.core.commands.Command;
 import dev.nextftc.core.subsystems.Subsystem;
@@ -11,4 +11,4 @@ public class Flicker implements Subsystem {
     private ServoEx akon = new ServoEx("akon");
     public Command smackThat = new SetPosition(akon, 0.9);
     public Command allOnTheFloor = new SetPosition(akon, 0);
-}
+}   `

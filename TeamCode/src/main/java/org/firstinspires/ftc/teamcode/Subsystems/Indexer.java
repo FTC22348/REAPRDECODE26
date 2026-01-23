@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Subsystems;
+package org.firstinspires.ftc.teamcode;
 
 import dev.nextftc.control.ControlSystem;
 import dev.nextftc.core.commands.Command;
@@ -11,6 +11,7 @@ public class Indexer implements Subsystem {
     private Indexer() { }
     private final double etpr = 2 * ((((1+(46.0/17.0))) * (1+(46.0/11.0))) * (1+(46.0/11.0)) * 28); //60rpm, and 2:1 bevel gear
     private MotorEx motor = new MotorEx("indexter");
+
     private ControlSystem controlSystem = ControlSystem.builder()
             .posPid(0.005, 0, 0)
             .elevatorFF(0)
