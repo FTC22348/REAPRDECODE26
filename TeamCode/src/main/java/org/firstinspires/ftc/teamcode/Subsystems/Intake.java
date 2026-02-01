@@ -25,7 +25,7 @@ public class Intake implements Subsystem {
     public Command off() {
         return new RunToVelocity(controller, 0.0).requires(this);
     }
-    public Command spit() { return new RunToVelocity(controller, -50).requires(this); }
+    public Command spit() { return new RunToVelocity(controller, -100).requires(this); }
 
     @Override
     public void periodic() {

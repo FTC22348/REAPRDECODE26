@@ -36,7 +36,7 @@ public class Red_Dream_Auton extends NextFTCOpMode {
                 new PedroComponent(Constants::createFollower)
         );
     }
-    private PathChain path1, path2, path3, path4;
+    private PathChain path1, path2, path3, path4, path5;
     private Command spinIt = new InstantCommand(()->{Indexer.INSTANCE.move120().schedule();});
     @Override
     public void onInit() {
@@ -72,6 +72,14 @@ public class Red_Dream_Auton extends NextFTCOpMode {
                                 new Pose(108.017, 113.475)
                         )
                 ).setLinearHeadingInterpolation(Math.toRadians(0), Math.toRadians(36))
+                .build();
+
+        path5 = follower().pathBuilder().addPath(
+                        new BezierLine(
+                                new Pose(108.017, 113.475),
+                                new Pose(95.745, 60.529)
+                        )
+                ).setLinearHeadingInterpolation(Math.toRadians(36), Math.toRadians(0))
                 .build();
     }
     private Command autonomousRoutine() {
@@ -144,7 +152,8 @@ public class Red_Dream_Auton extends NextFTCOpMode {
                         new Delay(0.5),
                         Flicker.INSTANCE.allOnTheFloor
                 ),
-                Flywheel.INSTANCE.stop()
+                Flywheel.INSTANCE.stop().withDeadline(new Delay(1)),
+                new FollowPath(path5, true, 0.5)
         );
     }
     @Override

@@ -27,7 +27,6 @@ public class Teleoperated extends NextFTCOpMode {
         );
     }
 
-    private final MotorEx aarav = new MotorEx("malhotra");
     @Override
     public void onStartButtonPressed() {
         DriverControlledCommand driverControlled = new PedroDriverControlled(
@@ -37,36 +36,40 @@ public class Teleoperated extends NextFTCOpMode {
         );
         driverControlled.schedule();
 
+
         Gamepads.gamepad2().a().whenBecomesTrue(() -> Indexer.INSTANCE.move60().schedule());
 
-        Gamepads.gamepad2().b().whenBecomesTrue(() -> Indexer.INSTANCE.move2().schedule());
+        Gamepads.gamepad2().b().whenBecomesTrue(() -> Indexer.INSTANCE.shimmy().schedule());
 
         Gamepads.gamepad2().leftBumper().whenBecomesTrue(() -> Indexer.INSTANCE.back120().schedule());
 
         Gamepads.gamepad2().rightBumper().whenBecomesTrue(() -> Indexer.INSTANCE.move120().schedule());
 
+
         Gamepads.gamepad2().rightStickY().greaterThan(0.2).whenBecomesTrue(Flywheel.INSTANCE.stop());
 
         Gamepads.gamepad2().rightStickY().lessThan(-0.2).whenBecomesTrue(Flywheel.INSTANCE.spinUp());
+
+        Gamepads.gamepad2().rightTrigger().greaterThan(0.2).whenBecomesTrue(Flicker.INSTANCE.smackThat);
+
+        Gamepads.gamepad2().rightTrigger().greaterThan(0.2).whenBecomesFalse(Flicker.INSTANCE.allOnTheFloor);
+
 
         Gamepads.gamepad1().rightTrigger().greaterThan(0.2).whenBecomesTrue(Intake.INSTANCE.swallow());
 
         Gamepads.gamepad1().rightTrigger().greaterThan(0.2).whenBecomesFalse(Intake.INSTANCE.off());
 
-        Gamepads.gamepad1().rightBumper().whenBecomesTrue(Intake.INSTANCE.spit());
+        Gamepads.gamepad1().leftTrigger().greaterThan(0.2).whenBecomesTrue(Intake.INSTANCE.spit());
 
-        Gamepads.gamepad1().rightBumper().whenBecomesFalse(Intake.INSTANCE.off());
+        Gamepads.gamepad1().leftTrigger().greaterThan(0.2).whenBecomesFalse(Intake.INSTANCE.off());
+
 
         Gamepads.gamepad2().leftTrigger().greaterThan(0.2).whenBecomesTrue(Intake.INSTANCE.swallow());
 
         Gamepads.gamepad2().leftTrigger().greaterThan(0.2).whenBecomesFalse(Intake.INSTANCE.off());
 
-        Gamepads.gamepad1().leftBumper().whenBecomesTrue(Intake.INSTANCE.spit());
+        Gamepads.gamepad2().x().whenBecomesTrue(Intake.INSTANCE.spit());
 
-        Gamepads.gamepad1().leftBumper().whenBecomesFalse(Intake.INSTANCE.off());
-
-        Gamepads.gamepad2().rightTrigger().greaterThan(0.2).whenBecomesTrue(Flicker.INSTANCE.smackThat);
-
-        Gamepads.gamepad2().rightTrigger().greaterThan(0.2).whenBecomesFalse(Flicker.INSTANCE.allOnTheFloor);
+        Gamepads.gamepad2().x().whenBecomesFalse(Intake.INSTANCE.off());
     }
 }

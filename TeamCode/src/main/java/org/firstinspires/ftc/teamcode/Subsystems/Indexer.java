@@ -9,12 +9,11 @@ import dev.nextftc.hardware.impl.MotorEx;
 public class Indexer implements Subsystem {
     public static final Indexer INSTANCE = new Indexer();
     private Indexer() { }
-    private final double etpr = 2 * ((((1+(46.0/17.0))) * (1+(46.0/11.0))) * (1+(46.0/11.0)) * 28); //60rpm, and 2:1 bevel gear
+    private final double etpr = 2 * ((((1 + (46.0 / 17.0))) * (1 + (46.0 / 17.0))) * (1 + (46.0 / 17.0)) * 28); //117rpm, and 2:1 bevel gear
     private MotorEx motor = new MotorEx("indexter");
 
     private ControlSystem controlSystem = ControlSystem.builder()
-            .posPid(0.005, 0, 0)
-            .elevatorFF(0)
+            .posPid(0.0035, 0, 0)
             .build();
     public Command move60() {
         return new RunToPosition(controlSystem, motor.getCurrentPosition() - etpr/6).requires(this);
@@ -25,8 +24,8 @@ public class Indexer implements Subsystem {
     public Command back120() {
         return new RunToPosition(controlSystem, motor.getCurrentPosition() + etpr/3).requires(this);
     }
-    public Command move2() { //for small adjustments
-        return new RunToPosition(controlSystem, motor.getCurrentPosition() - etpr/180).requires(this);
+    public Command shimmy() { //for small adjustments
+        return new RunToPosition(controlSystem, motor.getCurrentPosition() + etpr/90).requires(this);
     }
 
     @Override

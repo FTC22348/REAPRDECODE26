@@ -13,7 +13,7 @@ import dev.nextftc.hardware.impl.MotorEx;
 public class Flywheel implements Subsystem {
     public static final Flywheel INSTANCE = new Flywheel();
     private Flywheel() { }
-    public static int velocity = 875; //for like 18 inches away
+    public static int velocity = 870; //for like 18 inches away
     public final MotorEx shooter = new MotorEx("manesh").reversed();
     public final MotorEx farmer = new MotorEx("ranjit");
     private final MotorGroup flywheel = new MotorGroup(shooter, farmer);
